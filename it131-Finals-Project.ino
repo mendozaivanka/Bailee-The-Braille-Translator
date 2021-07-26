@@ -59,10 +59,9 @@ void setup(){
   pinMode(capsLED, OUTPUT);
   pinMode(numberLED, OUTPUT);
 
-  // Set up the Piezo pin to be an output :
+  //Set up the Piezo pin to be an output :
   pinMode(buzzer, OUTPUT);
   
-  // Initialize the 16x2
   lcd.begin(16, 2);
 } 
 
@@ -94,7 +93,7 @@ void loop(){
   int tlLEDState, mlLEDState, blLEDState, 
   trLEDState, mrLEDState, brLEDState, capsLEDState, numberLEDState;
   
-  // sets cursor to upperleft of the LCD display
+  //Sets cursor to upperleft of the LCD display
   lcd.setCursor(tempCounter, 0); //sets cursor to the next LCD square
   if (tempCounter >= 16){
    lcd.scrollDisplayLeft(); //when LCD is full, it will scroll towards the left
@@ -262,7 +261,7 @@ void loop(){
   //letter D or number 4
   if (translateState == LOW && tlLEDState == HIGH && trLEDState == HIGH && mlLEDState == LOW && mrLEDState == HIGH && blLEDState == LOW && brLEDState == LOW){
     letter = "D";
-    number = "";
+    number = "4";
     if (punctuation == 1 && numberLEDState != HIGH || tempCounter == 0 && numberLEDState != HIGH || capsLEDState == HIGH){
       lcd.print(letter);
       punctuation = 0;
@@ -722,5 +721,8 @@ void loop(){
   //reset
   if (translateState == LOW && tlLEDState == HIGH && trLEDState == HIGH && mlLEDState == HIGH && mrLEDState == HIGH && blLEDState == HIGH && brLEDState == HIGH){
     lcd.clear();
+    resetInput();
+    tempCounter = 0;
   }
+
 } // end of loop()
